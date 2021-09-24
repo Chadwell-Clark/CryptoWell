@@ -9,7 +9,7 @@ import { Cryptocurrencies, News } from '../components';
 const {Title} = Typography;
 
 const HomePage = () => {
-const { data, isFetching } = useGetCryptosQuery();
+const { data, isFetching } = useGetCryptosQuery(10);
 const globalStats = data?.data?.stats;
 
 
@@ -31,6 +31,7 @@ if (isFetching) return "Loading...";
 
 
         </div>
+        {/* if props(simplified) is not given a value when passed down it = true */}
         <Cryptocurrencies simplified/>
         <div className="home-heading-container">
             <Title level={2} className="home-title">Latest Crypto News</Title>
