@@ -42,7 +42,7 @@ const CryptoDetails = () => {
   const stats = [
     {
       title: "Price to USD",
-      value: `$ ${cryptoDetails.price && millify(cryptoDetails.price)}`,
+      value: `$ ${parseFloat(cryptoDetails.price).toFixed(2)}`,
       icon: <DollarCircleOutlined />,
     },
     { title: "Rank", value: cryptoDetails.rank, icon: <NumberOutlined /> },
@@ -118,7 +118,7 @@ const CryptoDetails = () => {
       </Select>
       <LineChart
         coinHistory={coinHistory}
-        currentPrice={millify(cryptoDetails.price)}
+        currentPrice={parseFloat(cryptoDetails.price).toFixed(2)}
         coinName={cryptoDetails.name}
       />
       <Col className="stats-container">
@@ -130,7 +130,7 @@ const CryptoDetails = () => {
             <p>An overview showing the statistics of {cryptoDetails.name}</p>
           </Col>
           {stats.map(({ icon, title, value }) => (
-            <Col className="coin-stats">
+            <Col key={title} className="coin-stats">
               <Col className="coin-stats-name">
                 <Text>{icon}</Text>
                 <Text>{title}</Text>
@@ -147,7 +147,7 @@ const CryptoDetails = () => {
             <p>Overview showing all cryptocurrencies statistics</p>
           </Col>
           {genericStats.map(({ icon, title, value }) => (
-            <Col className="coin-stats">
+            <Col key={`${title}${value}`} className="coin-stats">
               <Col className="coin-stats-name">
                 <Text>{icon}</Text>
                 <Text>{title}</Text>
@@ -169,7 +169,7 @@ const CryptoDetails = () => {
             {cryptoDetails.name} Links
           </Title>
           {cryptoDetails.links?.map((link) => (
-            <Row className="coin-link" key={link.name}>
+            <Row className="coin-link" key={link.url}>
               <Title level={5} className="link-name">
                 {link.type}
               </Title>
